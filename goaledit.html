@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="vue.js"></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>JS Bin</title>
+<link rel="stylesheet" href="animation.css">
+<!-- UIkit JS -->
+<link rel="stylesheet" href="uikit.min.css" />
+<script src="jquery.min.js"></script>
+<script src="uikit.min.js"></script>
+<script src="uikit-icons.min.js"></script>
+<script src="rangeslider.js"></script>
+
+<script src="cordova.js"></script>
+<script src="firebase.js"></script>
+
+
+<link rel="stylesheet" href="all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+<script src="Chart.min.js"></script>
+<script> var config = {
+    apiKey: "AIzaSyAglEXeKqtBz5NwjxAxbLBnIA1uZHOUUmQ",
+    authDomain: "digi-hack-abc.firebaseapp.com",
+    databaseURL: "https://digi-hack-abc.firebaseio.com",
+    projectId: "digi-hack-abc",
+    storageBucket: "digi-hack-abc.appspot.com",
+    messagingSenderId: "125916166369"
+  };
+  firebase.initializeApp(config);
+  var database= firebase.database();
+database.ref("test").set("ASDF");
+var sa=0;
+database.ref("jsoutputs/").on("value",function(data){
+var d= data.val();
+console.log(d);
+app.joutputs=d;
+sa = d.savings_amount;
+var keys=Object.keys(app.joutputs.user_final_amounts);
+$(".progress2").each(function(i,e){
+    /*ufa*100/(Take Average*2)*/
+    var u = parseInt(app.joutputs.user_final_amounts[keys[i]]);
+    var a = parseInt(app.joutputs.avg[keys[i]]);
+    var p = 50*u/a; 
+    $(this).css("background","-webkit-linear-gradient(left, lightgreen "+p+"%, white "+p+"%)")
+    
+    if(p>50){
+        $(this).css("background","-webkit-linear-gradient(left, red "+p+"%, white "+p+"%)")
+    
+
+    }
+
+});
+});
+
+database.ref("pinputs").on("value",function(data){
+app.maxvalue=Math.ceil(data.val().cost/sa);
+
+});
+
+database.ref("data/-LPohPBNC7d0R8UuPGyq").on("value",function(data){
+app.tran=(data.val());
+
+});
+
+
+</script>
+<style>body{
+    background-image: linear-gradient(#045864, #03CBF9)
+  };
+  
+  html {margin:0;
+      height: 100vh !important; 
+    width:100vw !important
+  }
+  *{
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+  }
+  body {
+      height: 100vh !important;
+    width:100vw !important; 
+      margin: 0;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+  }
+  .Aligner-item {
+    color:white;font-family:"Open Sans"; font-size:9vw;position:absolute;top:25%;align-content: center; left:25%
+  }
+  
+  body{
+  background-image: linear-gradient(#045864, #03CBF9)
+}
+
+*{font-family: 'Rubik'}
+
+
+span{font-family: 'Rubik', sans-serif;
+ 
+  color:white; font-size:40px; 
+}
+div.overlay{
+position: fixed;height: 100vh;width:100vw;z-index:9999;top:0;left:0;background: RED
+
+
+}
+
+#tags>.uk-tab>.uk-active>a{
+color:white
+
+}
+#tags{
+background: black;color:white; font-style: italic
+
+}
+.small{
+
+font-size:2vw; 
+}
+.uk-list li, .wt{color:white}
+.uk-tab-bottom{position:fixed;bottom:0;margin:0;
+  background-color:white;opacity:.9;    height: 44px;
+}
+div.main{height:calc(100vh - 124px);overflow-x: scroll}
+
+button.landing{
+    background:white;border:0;border-radius:1%; position:absolute;bottom:25%;left:40%;padding:15px; font-size:16px
+}.progress {
+    width:100%;
+    height:5px;
+    border:0px solid black;
+    background: -webkit-linear-gradient(left, blue 50%, white 50%);
+    background: -moz-linear-gradient(left, blue 50%, white 50%);
+    background: -ms-linear-gradient(left, blue 50%, white 50%);
+    background: linear-gradient(left, blue 50%, white 50%);
+    margin-bottom:0px
+}.progress2 {
+    width:100%;
+    height:5px;
+    border:0px solid black;
+    background: -webkit-linear-gradient(left, lightgreen 50%, white 50%);
+    background: -moz-linear-gradient(left, lightgreen 50%, white 50%);
+    background: -ms-linear-gradient(left, lightgreen 50%, white 50%);
+    background: linear-gradient(left, lightgreen 50%, white 50%);
+}
+
+
+.uk-card{margin-bottom:10px}
+/* White Change Opacity (85, ) */
+  nav{margin:0 !important; opacity:.8; height: 80px; z-index:99999!important}
+  canvas{height:80vw!important;width:80vw!important;margin:auto;padding:30px}
+  </style>
+
+</head>
+<body>
+        <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+             
+        <nav class="uk-navbar-container" uk-navbar >
+                <div class="uk-navbar-center">
+            
+                 
+                    <a class="uk-navbar-item uk-logo" href="#">Edit Goals</a>
+               
+            </nav></div>
+
+
+   <style>
+   h1,h4{padding:5px}
+   
+   </style>       
+
+<div class="main" id="app"> 
+      
+        <div id="eg">
+                <h1>{{goals[selectedgoal].title}}</h1>
+
+                <div class="uk-margin">
+                        <input class="uk-range" type="range" value="1" min="1" v-bind:max="maxvalue" step="1">
+                    </div>
+          
+        <div v-for="(p,k) in joutputs.avg">
+                <h4>{{k}}</h4> 
+                <!-- <progress id="js-progressbar" class="uk-progress" v-bind:value="joutputs.user_final_amounts[k]" min="0" v-bind:max="2*p"></progress> -->
+            <div class="progress"> </div>
+            <div class="progress2"> </div>
+            </div>
+            </div>
+    
+
+
+
+
+<ul id="tabs" class="uk-child-width-expand uk-tab-bottom uk-width-1-1" uk-tab>
+        <li class="b uk-active"><a href="break.html"><i class="fas fa-dollar-sign fa-2x"></i></a></li>
+        <li  class="h "><a href="home.html"><i class="fas fa-2x fa-home"></i></a></li>
+        <li class="g "><a href="goal.html"><i class="fas fa-2x fa-ring"></i></a></li>
+    </ul>
+
+
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {selected:{title:["TEST"]},
+      price:0,
+      message:"Yest",
+    suggestions: 'Hello Vue!',
+    fi:40,
+    goals:{A3frF:{
+        title:"Goal 1", done:"66", uid:""
+
+    },A3keP:{
+        title:"Goal 2", done:"2"
+
+    }},
+    tran:[],
+    prefs:{
+  "entertainment" : true,
+  "food" : true,
+  "phone" : false,
+  "rent" : true,
+  "transport" : true,
+  "utilities" : false,
+},
+joutputs:{
+  "Moneybreakdown" : {
+    "entertainment" : 19.9,
+    "food" : 20.175950967370255,
+    "phone" : 7.414704988077901,
+    "rent" : 32.02223591352078,
+    "transport" : 6.817599897581976,
+    "utilities" : 13.777824897181906
+  },
+  "Months" : 3,
+  "avg" : {
+    "entertainment" : 460.0,
+    "food" : 720.0,
+    "phone" : 150.0,
+    "rent" : 1200.0,
+    "transport" : 140.0,
+    "utilities" : 350.0
+  },
+  "goal" : 1,
+  "savings_amount" : 588.6800000000003,
+  "user_final_amounts" : {
+    "entertainment" : 506.0,
+    "food" : 792.0,
+    "phone" : 370.66999999999996,
+    "rent" : 1320.0,
+    "transport" : 154.0,
+    "utilities" : 688.7700000000001
+  }
+}
+,
+selectedgoal:"A3frF",
+maxvalue:100
+
+    
+  }, 
+  methods:{
+      choose:function(dataset){
+            this.selected=(dataset);
+      },
+      gc:function(dataset){
+            this.selectedgoal=(dataset);
+      },
+      pref:function(){
+            alert("TE");
+      }
+  },
+  filters: {
+  round: function (value) {
+    if (!value) return ''
+    value = parseFloat(value)
+    return Math.ceil(value)
+  }
+}
+})
+
+  // Initialize Firebase
+ 
+
+$(document).on("click","button.landing",function(){
+ $(".landing").animate({opacity:0},1000);
+ location.href="home.html"
+
+})
+
+
+$(document).on("click",".b",function(){
+ location.href="break.html"
+
+})
+
+$(document).on("click",".h",function(){
+ location.href="home.html"
+
+})
+$(document).on("click",".g",function(){
+ location.href="goal.html"
+
+});
+
+$(document).on("click",".p",function(){
+ location.href="addgoal.html"
+
+})
+
+$("input[type='range']").on("change",function(){
+ var x=$("input[type=range]").val();
+firebase.database().ref("pinputs/months").set(x);
+})
+
+
+</script>
+
+
+</body>
+</html>

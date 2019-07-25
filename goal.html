@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="vue.js"></script>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>JS Bin</title>
+<link rel="stylesheet" href="animation.css">
+<!-- UIkit JS -->
+<link rel="stylesheet" href="uikit.min.css" />
+<script src="jquery.min.js"></script>
+<script src="uikit.min.js"></script>
+<script src="uikit-icons.min.js"></script>
+<script src="rangeslider.js"></script>
+
+<script src="cordova.js"></script>
+<script src="firebase.js"></script>
+
+
+<link rel="stylesheet" href="all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+<script src="Chart.min.js"></script>
+<script> var config = {
+    apiKey: "AIzaSyAglEXeKqtBz5NwjxAxbLBnIA1uZHOUUmQ",
+    authDomain: "digi-hack-abc.firebaseapp.com",
+    databaseURL: "https://digi-hack-abc.firebaseio.com",
+    projectId: "digi-hack-abc",
+    storageBucket: "digi-hack-abc.appspot.com",
+    messagingSenderId: "125916166369"
+  };
+  firebase.initializeApp(config);
+  var database= firebase.database();
+database.ref("test").set("ASDF");
+database.ref("jsoutputs/").on("value",function(data){
+var d= data.val();
+console.log(d);
+app.joutputs=d;
+});</script>
+<style>body{
+    background-image: linear-gradient(#045864, #03CBF9)
+  };
+  
+  html {margin:0;
+      height: 100vh !important; 
+    width:100vw !important
+  }
+  *{
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
+  }
+  body {
+      height: 100vh !important;
+    width:100vw !important; 
+      margin: 0;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+  }
+  .Aligner-item {
+    color:white;font-family:"Open Sans"; font-size:9vw;position:absolute;top:25%;align-content: center; left:25%
+  }
+  
+  body{
+  background-image: linear-gradient(#045864, #03CBF9)
+}
+
+*{font-family: 'Rubik'}
+
+
+span{font-family: 'Rubik', sans-serif;
+ 
+  color:white; font-size:40px; 
+}
+div.overlay{
+position: fixed;height: 100vh;width:100vw;z-index:9999;top:0;left:0;background: RED
+
+
+}
+
+#tags>.uk-tab>.uk-active>a{
+color:white
+
+}
+#tags{
+background: black;color:white; font-style: italic
+
+}
+.small{
+
+font-size:2vw; 
+}
+.uk-list li, .wt{color:white}
+.uk-tab-bottom{position:fixed;bottom:0;margin:0;
+  background-color:white;opacity:.9;    height: 44px;
+}
+div.main{height:calc(100vh - 124px);overflow-x: scroll}
+
+button.landing{
+    background:white;border:0;border-radius:1%; position:absolute;bottom:25%;left:40%;padding:15px; font-size:16px
+}
+
+.uk-card{margin-bottom:10px}
+/* White Change Opacity (85, ) */
+  nav{margin:0 !important; opacity:.8; height: 80px; z-index:99999!important}
+  canvas{height:80vw!important;width:80vw!important;margin:auto;padding:30px}
+  </style>
+
+</head>
+<body>
+        <div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+             
+        <nav class="uk-navbar-container" uk-navbar >
+                <div class="uk-navbar-center">
+            
+                    <a class="uk-navbar-item uk-logo" href="#">Goals</a>
+                    <div class="uk-navbar-center-right"><div>
+                        <ul class="uk-navbar-nav">
+                            <li class="p"><a href="#"><i class="fas fa-plus"></i></a></li>
+                        </ul>
+                    </div></div>
+            
+                </div>
+            </nav></div>
+
+
+          
+
+<div class="main" id="app"> 
+      
+   <div id="goals"><div v-for="(g,k) in goals" v-on:click="gc(k)"class="ge uk-card uk-card-default uk-card-body uk-width-1-2@m">
+                <h3 class="uk-card-title">{{g.title}} <small>{{g.done}}%</small></h3>
+                <p>Lorem ipsum <a href="#">dolor</a> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </div>
+
+
+</div>
+    
+
+
+
+
+<ul id="tabs" class="uk-child-width-expand uk-tab-bottom uk-width-1-1" uk-tab>
+        <li class="b"><a href="break.html"><i class="fas fa-dollar-sign fa-2x"></i></a></li>
+        <li  class="h "><a href="home.html"><i class="fas fa-2x fa-home"></i></a></li>
+        <li class="g uk-active"><a href="goal.html"><i class="fas fa-2x fa-ring"></i></a></li>
+    </ul>
+
+
+<script>
+var app = new Vue({
+  el: '#app',
+  data: {selected:{title:["TEST"]},
+      price:0,
+      message:"Yest",
+    suggestions: 'Hello Vue!',
+    fi:40,
+    goals:{A3frF:{
+        title:"Goal 1", done:"66", uid:""
+
+    },A3keP:{
+        title:"Goal 2", done:"2"
+
+    }},
+    prefs:{
+  "entertainment" : true,
+  "food" : true,
+  "phone" : false,
+  "rent" : true,
+  "transport" : true,
+  "utilities" : false,
+},
+joutputs:{
+  "Moneybreakdown" : {
+    "entertainment" : 19.9,
+    "food" : 20.175950967370255,
+    "phone" : 7.414704988077901,
+    "rent" : 32.02223591352078,
+    "transport" : 6.817599897581976,
+    "utilities" : 13.777824897181906
+  },
+  "Months" : 3,
+  "avg" : {
+    "entertainment" : 460.0,
+    "food" : 720.0,
+    "phone" : 150.0,
+    "rent" : 1200.0,
+    "transport" : 140.0,
+    "utilities" : 350.0
+  },
+  "goal" : 1,
+  "savings_amount" : 588.6800000000003,
+  "user_final_amounts" : {
+    "entertainment" : 506.0,
+    "food" : 792.0,
+    "phone" : 370.66999999999996,
+    "rent" : 1320.0,
+    "transport" : 154.0,
+    "utilities" : 688.7700000000001
+  }
+}
+,
+selectedgoal:"A3frF"
+
+    
+  }, 
+  methods:{
+      choose:function(dataset){
+            this.selected=(dataset);
+      },
+      gc:function(dataset){
+            this.selectedgoal=(dataset);
+      },
+      pref:function(){
+            alert("TE");
+      }
+  },
+  filters: {
+  round: function (value) {
+    if (!value) return ''
+    value = parseFloat(value)
+    return Math.ceil(value)
+  }
+}
+})
+// var ctx = document.getElementById('myChart').getContext('2d');
+// var chart = new Chart(ctx, {
+//     // The type of chart we want to create
+//      type: 'doughnut',
+
+//     // The data for our dataset
+//     data : {
+//     datasets: [{
+//         data: Object.values(app.joutputs.MoneyBreakdown),
+//        backgroundColor: [
+//                 'rgba(255, 99, 132, 0.2)',
+//                 'rgba(54, 162, 235, 0.2)',
+//                 'rgba(255, 206, 86, 0.2)',
+//                 'rgba(75, 192, 192, 0.2)',
+//                 'rgba(153, 102, 255, 0.2)',
+//                 'rgba(255, 159, 64, 0.2)'
+//             ],
+//             borderColor: [
+//                 'rgba(255,99,132,1)',
+//                 'rgba(54, 162, 235, 1)',
+//                 'rgba(255, 206, 86, 1)',
+//                 'rgba(75, 192, 192, 1)',
+//                 'rgba(153, 102, 255, 1)',
+//                 'rgba(255, 159, 64, 1)'
+//             ],
+//     }],
+
+//     // These labels appear in the legend and in the tooltips when hovering different arcs
+//     labels: Object.keys(app.joutputs.MoneyBreakdown)
+// },
+
+//     // Configuration options go here
+//     options: {legend:{labels:{fontColor:"white"}}}
+// });
+
+
+</script>
+<script>
+  // Initialize Firebase
+ 
+
+var freeincome=64;
+
+$(document).on("change",".price",function(){
+
+
+var url = "http://svcs.ebay.com/services/search/FindingService/v1";
+    url += "?OPERATION-NAME=findItemsByKeywords";
+    url += "&SERVICE-VERSION=1.0.0";
+    url += "&SECURITY-APPNAME=Adityasa-FinPacer-PRD-27f449ff7-f4ee068b";
+    url += "&GLOBAL-ID=EBAY-US";
+    url += "&RESPONSE-DATA-FORMAT=JSON";
+    url += "&callback=_cb_findItemsByKeywords";
+    url += "&REST-PAYLOAD";
+    url += "&keywords=headphones";
+    url += "&itemFilter.name=MaxPrice&itemFilter.value="+(parseFloat(app.price)-50)+"&itemFilter.paramName=Currency&itemFilter.paramValue=AUD&itemFilter.name=MaxPrice&itemFilter.value="+(parseFloat(app.price)+50)+"&itemFilter.paramName=Currency&itemFilter.paramValue=AUD"
+
+    url += "&paginationInput.entriesPerPage=10";
+
+function _cb_findItemsByKeywords(root) {
+  app.suggestions=(root.findItemsByKeywordsResponse[0].searchResult[0].item);
+  console.log(app.suggestions.galleryURL[0]);
+} 
+
+$.ajax({url:url,
+dataType:"jsonp"});
+
+
+
+});
+
+$(document).on("click","button.landing",function(){
+ $(".landing").animate({opacity:0},1000);
+ location.href="home.html"
+
+})
+
+
+
+$(document).on("click",".ge",function(){
+ location.href="goaledit.html"
+
+})
+
+$(document).on("click",".b",function(){
+ location.href="break.html"
+
+})
+
+$(document).on("click",".h",function(){
+ location.href="home.html"
+
+})
+$(document).on("click",".g",function(){
+ location.href="goal.html"
+
+});
+
+$(document).on("click",".p",function(){
+ location.href="addgoal.html"
+
+})
+
+</script>
+
+
+</body>
+</html>
